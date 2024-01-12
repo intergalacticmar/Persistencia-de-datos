@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TPSController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-  private CharacterController _controller;
-  private Transform _camera; 
+    private CharacterController _controller;
+    private Transform _camera; 
     private float _horizontal;
     private float _vertical;
 
@@ -24,12 +24,16 @@ public class TPSController : MonoBehaviour
     [SerializeField] private float _sensorRadius = 0.2f;
     [SerializeField] private LayerMask _groundLayer;
     private bool _isGrounded;
+
+    Manager _manager;
     
     // Start is called before the first frame update
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         _camera = Camera.main.transform;
+
+        _manager = GameObject.Find("Manager").GetComponent<Manager>();
     }
 
     // Update is called once per frame
@@ -79,6 +83,28 @@ public class TPSController : MonoBehaviour
             Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
 
             _controller.Move(moveDirection.normalized * _playerSpeed * Time.deltaTime);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 3)
+        {
+            _manager.numberPoint = 1;
+            _manager.SaveData();
+
+        }
+          if (other.gameObject.layer == 6)
+        {
+            _manager.numberPoint = 2;
+            _manager.SaveData();
+
+        }
+          if (other.gameObject.layer == 7)
+        {
+            _manager.numberPoint = 3;
+            _manager.SaveData();
+
         }
     }
 }
