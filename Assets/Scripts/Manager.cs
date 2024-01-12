@@ -17,7 +17,7 @@ public class SaveManager : MonoBehaviour
 
     public void SaveData()
     {
-        PlayerPrefs.SetString("CheckPoint", checkPoint);
+        PlayerPrefs.SetString("checkPoint", checkPoint);
         PlayerPrefs.SetFloat("positionX", userPosition.x);
         PlayerPrefs.SetFloat("positionY", userPosition.y);
         PlayerPrefs.SetFloat("positionZ", userPosition.z);
@@ -27,7 +27,7 @@ public class SaveManager : MonoBehaviour
 
     void LoadData()
     {
-        checkPointText.text = "CheckPoint: " + PlayerPrefs.GetString("CheckPoint", "No pound found");
+        checkPointText.text = "checkPoint: " + PlayerPrefs.GetString("CheckPoint", "No point found");
         userPositionText.text = "Player position: " + PlayerPrefs.GetFloat("positionX", 0).ToString() + "x" + PlayerPrefs.GetFloat("positionY", 0).ToString() + "y" + PlayerPrefs.GetFloat("positionZ", 0).ToString() + "z";
     }
 
